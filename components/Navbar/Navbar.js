@@ -1,10 +1,16 @@
 // Navbar.js
 "use client"
 
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth,signOut } from "firebase/auth";
+import { initfirebase } from "@/lib/firebase_config";
 import Link from "next/link";
 import ThemeToggler from "../Theme/ThemeToggler";
 
 const Navbar = () => {
+  initfirebase();
+  const auth=getAuth();
+  const [user,loading]=useAuthState(auth);
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex items-center justify-between">
@@ -12,13 +18,16 @@ const Navbar = () => {
           Slack With AI
         </Link>
 
-        <div className="space-x-4">
+        <div className="space-x-4 flex">
           <Link href="/" className="text-white">
           Home
           </Link>
-          <a href="/signin" className='text-white'>
+          {(user)?(<button className='text-white' onClick={()=>signOut(auth)}>
+            logout
+          </button>):(<Link href="/signin" className='text-white'>
             Login
-          </a>
+          </Link>)}
+          {(user)?(<img src={user.photoURL} width={25} height={25} className="rounded-2xl"/>):(" ")}
         </div>
         <div className='mr-2'>
           <ThemeToggler/>
