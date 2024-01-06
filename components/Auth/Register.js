@@ -7,7 +7,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Register = () => {
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cnfPassword, setCnfPassword] = useState("");
@@ -49,20 +48,6 @@ const Register = () => {
               />
         <div className="w-full max-w-md">
           <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 dark:bg-slate-950 dark:text-white dark:shadow-md dark:shadow-slate-700" onSubmit={handleRegister}>
-            <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="name">
-                Name
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-white"
-                id="name"
-                type="text"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2 dark:text-white" htmlFor="email">
                 Email

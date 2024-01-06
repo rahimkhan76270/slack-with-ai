@@ -18,7 +18,7 @@ const Navbar = () => {
           Slack With AI
         </Link>
 
-        <div className="space-x-4 flex">
+        <div className="space-x-4 flex justify-center items-center">
           <Link href="/" className="text-white">
           Home
           </Link>
@@ -27,7 +27,7 @@ const Navbar = () => {
           </button>):(<Link href="/signin" className='text-white'>
             Login
           </Link>)}
-          {(user)?(<img src={user.photoURL} width={25} height={25} className="rounded-2xl"/>):(" ")}
+          {(user)?(<img src={user.photoURL} className="rounded-2xl w-8 h-8 rounded-full"/>):(" ")}
         </div>
         <div className='mr-2'>
           <ThemeToggler/>
