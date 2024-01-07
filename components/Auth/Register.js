@@ -6,6 +6,7 @@ import { initfirebase } from '@/lib/firebase_config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -97,7 +98,10 @@ const Register = () => {
               >
                 Register
               </button>
+              <Link href="/signin" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"> Sign In</Link>
             </div>
+            <br />
+            <Link href="/passReset" className='text-red-500'>Forgot Password</Link> 
           </form>
         </div>
       </div>

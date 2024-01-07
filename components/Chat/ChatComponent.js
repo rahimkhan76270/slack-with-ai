@@ -46,7 +46,7 @@ function ChatComponent() {
                 <Navbar
                     left=<div>Logo</div>
                     center=<div>Home</div>
-                    right=<div>Contact</div> z
+                    right=<div>Contact</div>
                     type="light"
                 />
                 <MessageList

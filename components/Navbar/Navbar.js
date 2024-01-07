@@ -1,6 +1,5 @@
 // Navbar.js
 "use client"
-
 import Image from "next/image";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth,signOut } from "firebase/auth";

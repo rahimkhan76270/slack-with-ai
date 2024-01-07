@@ -1,3 +1,5 @@
+import Gemini from "@/components/AI/gemini";
+
 // Home.js
 const Home = () => {
   return (
@@ -17,6 +19,7 @@ const Home = () => {
         >
           Log In
         </a> */}
+        <Gemini/>
       </div>
     </div>
   );

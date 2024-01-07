@@ -7,19 +7,24 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { redirect } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 
 const Login = () => {
+
+  initfirebase();
+  const router=useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  initfirebase();
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const SignIn = async () => {
      await signInWithPopup(auth, provider)
      .then((result)=>{
       toast("signed in successfully👍👍");
+      router.push("/chat")
      }).catch((error)=>{
       toast("something went wrong 😒😒");
      });
@@ -29,6 +34,7 @@ const Login = () => {
     await signInWithEmailAndPassword(auth, email, password)
     .then((result)=>{
       toast("signed in successfully👍👍");
+      router.push("/chat")
     }).catch((error)=>{
       toast("something went wrong 😒😒")
     })
@@ -112,7 +118,8 @@ const Login = () => {
           </form>
           <button onClick={SignIn} className='m-2'>
             <img src="https://freelogopng.com/images/all_img/1657955079google-icon-png.png" alt="google logo" width={40} height={40} />
-          </button>
+          </button> <br />
+          <Link href="/passReset" className='text-red-500'>Forgot Password</Link>
         </div>
       </div>
     );

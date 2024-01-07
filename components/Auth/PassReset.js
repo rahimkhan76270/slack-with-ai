@@ -6,6 +6,7 @@ import { initfirebase } from '@/lib/firebase_config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 const PassReset = () => {
     const [email, setEmail] = useState('');
     initfirebase();
@@ -57,8 +58,6 @@ const PassReset = () => {
                                 required
                             />
                         </div>
-
-
                         <div className="flex items-center justify-between">
                             <button
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -66,6 +65,7 @@ const PassReset = () => {
                             >
                                 Send Link
                             </button>
+                            <Link href="/signin" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"> Sign In</Link>
                         </div>
                     </form>
                 </div>
