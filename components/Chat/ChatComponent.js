@@ -1,31 +1,70 @@
-import React from 'react'
-import { ChatList } from "react-chat-elements"
-import "react-chat-elements/dist/main.css"
+import React, { useState } from 'react';
+import { MessageList, Input, Button ,Navbar} from "react-chat-elements";
+import "react-chat-elements/dist/main.css";
+import TwoColumnLayout from './TwoColumns';
+import Contacts from './contacts';
+import { initfirebase } from '@/lib/firebase_config';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from 'firebase/auth';
+import TabGroup from './tabGroup';
+import UserChatList from './UserChatList';
+
 function ChatComponent() {
+    initfirebase();
+    const auth = getAuth();
+    const [user, loading] = useAuthState(auth);
+    const [message, setMessage] = useState("");
+    const [data, setData] = useState([]);
+    const handleSendMessage = () => {
+        const m = {
+            position: "right",
+            type: "text",
+            title: auth.currentUser.email,
+            text: message
+        }
+        if (message != "") {
+            setData((prev) => [...prev, m]);
+            setMessage("");
+        }
+    }
+    const onkeypress = (event) => {
+
+        if (event.key == "Enter" && message != "") {
+
+            handleSendMessage();
+        }
+    }
+
+    const tabs = [
+        { id: 1, label: <div className='font-bold mx-2' >Chats</div>, content: <div><UserChatList /></div> },
+        { id: 2, label: <div className='font-bold mx-2' >Contacts</div>, content: <Contacts /> },
+    ];
     return (
-        <div>
-            <ChatList
-                className='chat-list'
-                dataSource={[
-                    {
-                        avatar: 'https://avatars.githubusercontent.com/u/80540635?v=4',
-                        alt: 'kursat_avatar',
-                        title: 'Kursat',
-                        subtitle: "Why don't we go to the No Way Home movie this weekend ?",
-                        date: new Date(),
-                        unread: 3,
-                    },
-                    {
-                        avatar: 'https://avatars.githubusercontent.com/u/80540635?v=4',
-                        alt: 'kursat_avatar',
-                        title: 'Kursat',
-                        subtitle: "Why don't we go to the No Way Home movie this weekend ?",
-                        date: new Date(),
-                        unread: 3,
-                    }
-                ]} />
-        </div>
+        <TwoColumnLayout>
+            <TabGroup defaultTab={2} tabs={tabs} />
+            <div>
+                <Navbar
+                    left=<div>Logo</div>
+                    center=<div>Home</div>
+                    right=<div>Contact</div> z
+                    type="light"
+                />
+                <MessageList
+                    className='message-list'
+                    lockable={true}
+                    toBottomHeight={'100%'}
+                    dataSource={data}
+                />
+                <Input
+                    placeholder="Type here..."
+                    multiline={false}
+                    rightButtons={<Button text='send' onClick={handleSendMessage} />}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyPress={onkeypress}
+                />
+            </div>
+        </TwoColumnLayout>
     )
 }
-
 export default ChatComponent

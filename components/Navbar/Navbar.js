@@ -1,6 +1,7 @@
 // Navbar.js
 "use client"
 
+import Image from "next/image";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth,signOut } from "firebase/auth";
 import { initfirebase } from "@/lib/firebase_config";
@@ -12,9 +13,10 @@ const Navbar = () => {
   const auth=getAuth();
   const [user,loading]=useAuthState(auth);
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-gray-800 p-4 w-full">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className="text-white text-2xl font-bold">
+        <Link href="/" className="text-white text-2xl font-bold flex">
+          <Image src="/slack.png" height={25} width={25} alt="logo" className="mx-2"></Image>
           Slack With AI
         </Link>
 
