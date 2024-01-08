@@ -49,7 +49,7 @@ const UserProfile = () => {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     const storage = getStorage();
-    const storageref = ref(storage, `images/${user.uid}/profile_pic`);
+    const storageref = ref(storage, `images/${user.email}/profile_pic`);
     if (file) {
       await uploadBytesResumable(storageref, file).then(async (snapshot) => {
         const downloadLink = await getDownloadURL(snapshot.ref);
