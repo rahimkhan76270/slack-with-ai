@@ -28,7 +28,7 @@ const Navbar = () => {
           </button>):(<Link href="/signin" className='text-white'>
             Login
           </Link>)}
-          {(user)?(<img src={user.photoURL} className="rounded-2xl w-8 h-8 rounded-full"/>):(" ")}
+          {(user)?(<Link href="/signin"><img src={user.photoURL} className="rounded-2xl w-8 h-8 rounded-full"/></Link>):(" ")}
         </div>
         <div className='mr-2'>
           <ThemeToggler/>

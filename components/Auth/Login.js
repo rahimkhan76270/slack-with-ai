@@ -42,7 +42,7 @@ const Login = () => {
   const [user, loading] = useAuthState(auth);
   if (user) {
     return (
-      <div className='dark:bg-black dark:text-white'>
+      <div className='dark:bg-black dark:text-white flex h-screen justify-center items-center'>
         <ToastContainer
                 position="top-center"
                 autoClose={5000}
@@ -55,7 +55,12 @@ const Login = () => {
                 pauseOnHover
                 theme="light"
               />
-        <button onClick={() => signOut(auth)}>signout</button>
+        <div>
+        <button onClick={() => signOut(auth)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mx-2">signout</button>
+        <Link href="/Profile" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mx-2">Profile</Link>
+        <Link href="/chat" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mx-2">Chat</Link>
+        </div>
+        
       </div>
     )
   }
